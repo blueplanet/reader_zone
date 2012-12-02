@@ -8,6 +8,9 @@ group :development, :test do
   gem 'haml-rails'
 
   gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'rb-fsevent'
 
   gem 'pry-rails'
 end
