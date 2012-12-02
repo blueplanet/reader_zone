@@ -7,6 +7,8 @@ group :development, :test do
   gem 'sqlite3'
   gem 'haml-rails'
 
+  gem 'rspec-rails'
+
   gem 'pry-rails'
 end
 
