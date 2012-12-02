@@ -2,15 +2,19 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.9'
 gem 'thin'
+gem 'haml-rails'
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'haml-rails'
 
   gem 'rspec-rails'
+end
+
+group :development do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'rb-fsevent'
+  gem 'growl'
 
   gem 'pry-rails'
 end
