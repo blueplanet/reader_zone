@@ -18,5 +18,9 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
+  load "#{Rails.root}/config/routes.rb"
 
+  if Spork.using_spork?
+    Rails.application.reloaders.each{ |reloader| reloader.execute_if_updated }
+  end
 end
