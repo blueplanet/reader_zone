@@ -1,0 +1,17 @@
+.row
+  %a.span1(href="")
+    %img{src: @book.image_url, width: 160, height: 160}
+  %article.span7
+    %span.row 
+      %a= @book.title
+    %span.row
+      %p= @book.description
+
+.notes.box
+  .notes.total
+    = "合計 #{@book.notes.count} 件のノートがあります"
+  - @book.notes.each do |note|
+    .row
+      .span1= note.page
+      .span2 ユーザ：蒼い惑星
+      .span4= note.note

@@ -1,4 +1,4 @@
 ReaderZone::Application.routes.draw do
-  resources :books, only: [:index]
+  resources :books, only: [:index, :show]
 
 end

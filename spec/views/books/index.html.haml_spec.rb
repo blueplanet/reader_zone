@@ -4,12 +4,12 @@ require 'spec_helper'
 describe "books/index.html.haml" do
   it "display all books" do
     assign(:books, [
-      stub("Book", 
+      stub_model(Book, 
         image_url: "http://books.shoeisha.co.jp//images/book/94964.jpg",
         title: "The RSpec Book",
         description: "ドキュメントを書くようにプログラミング！"
       ),
-      stub("Book", 
+      stub_model(Book, 
         image_url: "http://www.rubyinside.com/wp-content/uploads/2008/02/hummingbird-book-the-ruby-programming-language.jpg",
         title: "The Ruby Programming",
         description: "はじめに"
