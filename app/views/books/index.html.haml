@@ -1,0 +1,13 @@
+%h1 Books
+
+%ul.books.box
+- @books.each do |book|
+  .row
+    %a.span1(href="")
+      %img{src: book.image_url, width: 160, height: 160}
+    %article.span7
+      %span.row 
+        = "ノート数：#{book.notes.count}"
+        = link_to book.title, book
+      %span.row
+        %p= book.description
