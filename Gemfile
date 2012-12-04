@@ -4,6 +4,8 @@ gem 'rails', '3.2.9'
 gem 'thin'
 gem 'haml-rails'
 
+gem 'omniauth-twitter'
+
 group :development, :test do
   gem 'sqlite3'
 
