@@ -1,9 +1,11 @@
 require 'spec_helper'
 
-describe "Notes" do
+describe "Notes routing" do
+  let(:book) {Book.create title: "Ruby" }
+
   describe "GET /books/1/notes/new" do
     it "status should success" do
-      get new_book_note_path(2)
+      get new_book_note_path(book.id)
       response.status.should be(200)
     end
   end

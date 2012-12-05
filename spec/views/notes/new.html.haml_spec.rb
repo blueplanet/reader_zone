@@ -1,5 +1,18 @@
 require 'spec_helper'
 
 describe "notes/new.html.haml" do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:book) { Book.create title: "Ruby" }
+  let(:new_note) { stub_model(Note).as_new_record }
+  before do
+    assign(:book, book)
+    assign(:note, new_note)
+  end
+
+  it "should display a new note form" do
+    render
+
+    # Run the generator post with the --webrat flag if you want to use webrat matchers
+    assert_select "form", :action => new_book_note_path(1), :method => "post"
+  end
+
 end

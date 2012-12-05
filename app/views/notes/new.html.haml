@@ -1,2 +1,2 @@
-%h1 Notes#new
-%p Find me in app/views/notes/new.html.haml
+= form_for Note.new, url: new_book_note_path(@book.id) do |f|
+  = f.submit "作成"
