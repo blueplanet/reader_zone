@@ -1,5 +1,9 @@
 ReaderZone::Application.routes.draw do
-  resources :books, only: [:index, :show]
+  get "notes/new"
+
+  resources :books, only: [:index, :show] do
+    resources :notes, only: [:new]
+  end
 
   root to: "books#index"
 
