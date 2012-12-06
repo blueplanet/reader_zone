@@ -13,11 +13,8 @@ describe "books/show" do
       description: "はじめに"
     )
 
-    n1 = Note.new page: 10, note: "note test"
-    n2 = Note.new page: 100, note: "note test 22"
-
-    book.notes << n1
-    book.notes << n2
+    book.notes.build page: 10, note: "note test"
+    book.notes.build page: 100, note: "note test 22"
 
     book
   end
@@ -31,9 +28,24 @@ describe "books/show" do
     expect(rendered).to match /The Ruby Programming/
     expect(rendered).to match /はじめに/
 
+  end
+
+  it "should display note list of book" do
+    assign(:book, book)
+
+    render
+
     expect(rendered).to match /10/
     expect(rendered).to match /note test/
     expect(rendered).to match /100/
     expect(rendered).to match /note test 22/
+  end
+
+  it "should display link to new note" do
+    assign(:book, book)
+
+    render
+
+    assert_select "a", content: "ノートを追加"
   end
 end
