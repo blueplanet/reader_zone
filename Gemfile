@@ -19,6 +19,7 @@ group :development do
   gem 'growl'
 
   gem 'pry-rails'
+  gem 'rails-sh'
 end
 
 group :assets do
