@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe NotesController do
+  let(:user) { User.create! name: "testuser"}
   let(:book) { Book.create! title: "Ruby" }
 
   describe "GET 'new'" do
@@ -33,6 +34,12 @@ describe NotesController do
       expect {
         post :create, { note: { page: 100, note: "note content" }, book_id: book.id }
       }.to change(book.notes, :count).by(1)
+    end
+
+    it "should append a note to current_user#notes" do
+      expect {
+        post :create, { note: { page: 100, note: "note content"}, book_id: book.id }, {user_id: user.id}
+      }.to change(user.notes, :count).by(1)
     end
   end
 end

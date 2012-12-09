@@ -24,6 +24,7 @@ describe "books/show" do
 
   it "should display detail of book" do
     assign(:book, book)
+    assign(:notes, book.notes)
 
     render
 
@@ -34,30 +35,21 @@ describe "books/show" do
 
   it "should display note list" do
     assign(:book, book)
+    assign(:notes, book.notes.first)
 
     render
 
     expect(rendered).to match /10/
     expect(rendered).to match /testuser1/
     expect(rendered).to match /note test/
-    expect(rendered).to match /100/
-    expect(rendered).to match /testuser2/
-    expect(rendered).to match /note test 22/
   end
 
   it "should display link to new note" do
     assign(:book, book)
+    assign(:notes, book.notes)
 
     render
 
     assert_select "a", content: "ノートを追加"
-  end
-
-  it "should display link to only my notes" do
-    assign(:book, book)
-
-    render
-
-    assert_select "a", content: "自分の0み"
   end
 end

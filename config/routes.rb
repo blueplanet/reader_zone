@@ -3,6 +3,10 @@ ReaderZone::Application.routes.draw do
 
   resources :books, only: [:index, :show] do
     resources :notes, only: [:new, :create]
+
+    member do
+      get 'my', as: 'my_notes'
+    end
   end
 
   root to: "books#index"

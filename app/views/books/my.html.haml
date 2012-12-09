@@ -1,0 +1,8 @@
+= render 'book_detail'
+
+.notes.box
+  = render 'book_notes_info', count: @notes.count
+  - @notes.each do |note|
+    .row
+      .span1= note.page
+      .span4= note.note

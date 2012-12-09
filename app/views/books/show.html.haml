@@ -1,19 +1,10 @@
-.row
-  %a.span1(href="")
-    %img{src: @book.image_url, width: 160, height: 160}
-  %article.span7
-    %span.row 
-      %a= @book.title
-    %span.row
-      %p= @book.description
-    %span.row
-      = link_to "ノートを追加", new_book_note_path(@book)
+= render 'book_detail'
 
 .notes.box
-  .notes.total
-    = "合計 #{@book.notes.count} 件のノートがあります"
+  = link_to "自分のみ", my_notes_book_path(@book.id)
+  = render 'book_notes_info', count: @book.notes.count
   - @book.notes.each do |note|
     .row
       .span1= note.page
-      .span2 ユーザ：蒼い惑星
+      .span2= note.user.name
       .span4= note.note
