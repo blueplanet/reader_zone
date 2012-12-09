@@ -18,13 +18,17 @@ describe "books/show" do
 
     book.notes.build page: 10, note: "note test", user: user1
     book.notes.build page: 100, note: "note test 22", user: user2
-
+    book.save
+    
     book
   end
 
-  it "should display detail of book" do
+  before do
     assign(:book, book)
+    assign(:current_user, false)
+  end
 
+  it "should display detail of book" do
     render
 
     expect(rendered).to match /img/
@@ -33,8 +37,6 @@ describe "books/show" do
   end
 
   it "should display note list" do
-    assign(:book, book)
-
     render
 
     expect(rendered).to match /10/
@@ -46,18 +48,26 @@ describe "books/show" do
   end
 
   it "should display link to new note" do
-    assign(:book, book)
-
     render
 
     assert_select "a", content: "ノートを追加"
   end
 
   it "should display link to only my notes" do
-    assign(:book, book)
-
     render
 
     assert_select "a", content: "自分の0み"
+  end
+
+  context "with login user" do
+    before do
+      assign(:current_user, user1)
+    end
+
+    it "should display edit link for owner's note" do
+      render
+
+      assert_select 'a.btn', content: "編集"
+    end
   end
 end

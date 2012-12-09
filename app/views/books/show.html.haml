@@ -7,4 +7,7 @@
     .row
       .span1= note.page
       .span2= note.user.name
+      .span1
+        - if @current_user && note.user == @current_user
+          = link_to "編集", edit_book_note_path(@book.id, note.id), class: 'btn'
       .span4= note.note
