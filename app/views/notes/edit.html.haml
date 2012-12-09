@@ -1,4 +1,4 @@
-= form_for @note, url: edit_book_note_path(@book.id, @note.id) do |f|
+= form_for @note, url: book_note_path(@book, @note) do |f|
   = f.text_field :page
   = f.text_area :note
   = f.submit "保存"

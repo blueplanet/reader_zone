@@ -26,7 +26,6 @@ describe NotesController do
 
     it "should assigns @book" do
       post :create, { note: { page: 100, note: 'note content' }, book_id: book.id }
-
       assigns[:book].should eq(book)
     end
 

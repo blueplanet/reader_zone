@@ -9,5 +9,6 @@
       .span2= note.user.name
       .span1
         - if @current_user && note.user == @current_user
-          = link_to "編集", edit_book_note_path(@book.id, note.id), class: 'btn'
+          = link_to "編集", edit_book_note_path(@book, note), class: 'btn'
+          / # = link_to "削除", destroy_book_note_path(@book)
       .span4= note.note
