@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
-  before_filter :get_book, only: [:new, :create, :edit, :update]
-  before_filter :get_note, only: [:edit, :update]
+  before_filter :get_book, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :get_note, only: [:edit, :update, :destroy]
 
   def new
   end
@@ -18,6 +18,12 @@ class NotesController < ApplicationController
 
   def update
     @note.update_attributes(params[:note])
+
+    redirect_to book_path(@book)
+  end
+
+  def destroy
+    @note.delete
 
     redirect_to book_path(@book)
   end

@@ -77,5 +77,26 @@ describe NotesController do
         response.should redirect_to(book)
       end
     end
+
+    describe "DELETE note" do
+      before do
+        @delete_note = book.notes.build page: 101
+        @delete_note.save
+      end
+
+      it "destroy note" do
+        expect {
+          delete :destroy, {book_id: book.id, id: @delete_note.id}, user_id: user.id
+
+        }.to change(book.notes, :count).by(-1)
+      end
+
+      it "should redirect to book#show" do
+        delete :destroy, {book_id: book.id, id: @delete_note.id}, user_id: user.id
+
+        response.should redirect_to(book)
+      end
+    end
   end
+
 end

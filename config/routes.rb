@@ -4,7 +4,7 @@ ReaderZone::Application.routes.draw do
   get "notes/new"
 
   resources :books, only: [:index, :show] do
-    resources :notes, only: [:new, :create, :edit, :update]
+    resources :notes, only: [:new, :create, :edit, :update, :destroy]
 
     member do
       get 'my', as: 'my_notes'
