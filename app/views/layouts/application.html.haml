@@ -28,11 +28,11 @@
             %li
               %a Help
           %ul.nav.pull-right
-            - if current_user
+            - if @current_user
               %li.dropdown
                 %a.dropdown-toggle(data-toggle="dropdown")
-                  = image_tag current_user.image, width: 20, height: 20
-                  = current_user.name
+                  = image_tag @current_user.image, width: 20, height: 20
+                  = @current_user.name
                   %span.caret
                 %ul.dropdown-menu
                   %li

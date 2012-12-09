@@ -1,14 +1,33 @@
 class NotesController < ApplicationController
+  before_filter :get_book, only: [:new, :create, :edit, :update]
+  before_filter :get_note, only: [:edit, :update]
+
   def new
-    @book = Book.find(params[:book_id])
   end
 
   def create
-    @book = Book.find(params[:book_id])
     note = @book.notes.build(params[:note])
     note.user = current_user
     note.save
     
     redirect_to @book
+  end
+
+  def edit
+  end
+
+  def update
+    @note.update_attributes(params[:note])
+
+    redirect_to book_path(@book)
+  end
+
+  private
+  def get_book
+    @book = Book.find(params[:book_id])
+  end
+
+  def get_note
+    @note = Note.find(params[:id])
   end
 end
