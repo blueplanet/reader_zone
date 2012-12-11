@@ -7,6 +7,13 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
+  def create
+    @book = Book.new(params[:book])
+    @book.save
+
+    redirect_to @book
+  end
+
   def show
     @book = Book.find(params[:id])
     @notes = @book.notes

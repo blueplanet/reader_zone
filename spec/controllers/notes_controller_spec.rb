@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe NotesController do
+  before do
+    Book.delete_all
+  end
+  
   let(:user) { User.create! name: "testuser"}
   let(:book) { Book.create! title: "Ruby" }
 

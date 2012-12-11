@@ -5,7 +5,7 @@ describe "books/show" do
   let(:user1) {User.create name: "testuser1"}
   let(:user2) {User.create name: "testuser2"}
 
-  before(:all) do
+  before do
     Book.delete_all
   end
 
