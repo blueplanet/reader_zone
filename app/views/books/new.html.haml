@@ -1,0 +1,14 @@
+Book
+
+= form_for @book, html: {class: "form-horizontal"} do |f|
+  .control-group
+    = f.label "タイトル", class: "control-label"
+    .controls
+      = f.text_field :title
+  .control-group
+    = f.label "画像URL", class: "control-label"
+    .controls
+      = f.text_field :image_url
+  .control-group
+    .controls
+      = f.submit "作成", class: "btn btn-primary"

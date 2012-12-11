@@ -1,9 +1,5 @@
 ReaderZone::Application.routes.draw do
-  get "notes/edit"
-
-  get "notes/new"
-
-  resources :books, only: [:index, :show] do
+  resources :books, only: [:index, :show, :new] do
     resources :notes, only: [:new, :create, :edit, :update, :destroy]
 
     member do

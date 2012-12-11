@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BooksController, "GET /books/1/my" do
+describe BooksController do
   let(:user) {User.create! name: 'testuser'}
   let(:book) {Book.create! title: "Ruby" }
 
@@ -11,4 +11,10 @@ describe BooksController, "GET /books/1/my" do
     end
   end
 
+  describe "GET book#new" do
+    it "status should success" do
+      get new_book_path, {user_id: user.id}
+      response.status.should be(200)
+    end
+  end
 end
