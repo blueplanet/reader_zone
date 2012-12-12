@@ -130,9 +130,19 @@ describe BooksController do
     end
 
     context "with invalid params" do
-      it "assigns a created but unsaved book as @book"
+      it "assigns a created but unsaved book as @book" do
+        post :create, {book: {image_url: '.../test.png', description: 'ruby is ...'}}
 
-      it "re-renders the 'new' template"
+        assigns[:book].should be_a(Book)
+        assigns[:book].should_not be_persisted
+        assigns[:book].errors.should_not be_nil
+      end
+
+      it "re-renders the 'new' template" do
+        post :create, {book: {image_url: '.../test.png', description: 'ruby is ...'}}
+
+        response.should render_template(:new)
+      end
     end
   end
 end

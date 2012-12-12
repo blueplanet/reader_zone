@@ -9,9 +9,12 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(params[:book])
-    @book.save
-
-    redirect_to @book
+    
+    if @book.save
+      redirect_to @book
+    else
+      render :new
+    end
   end
 
   def show

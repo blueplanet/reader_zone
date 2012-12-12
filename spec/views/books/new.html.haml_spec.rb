@@ -12,7 +12,8 @@ describe "books/new.html.haml" do
     assert_select "form", action: new_book_path, method: "post" do
       assert_select "input#book_title", name: "book[title]"
       assert_select "input#book_image_url", name: "book[image_url]"
-      assert_select "input.btn.btn-primary", content: "登録"
+      assert_select 'textarea#book_description', name: "book[description]"
+      assert_select "input.btn.btn-primary", content: "作成"
     end
   end
 end
