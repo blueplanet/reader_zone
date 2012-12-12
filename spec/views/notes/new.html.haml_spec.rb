@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe "notes/new.html.haml" do
-  let(:book) { Book.create title: "Ruby" }
+  let(:book) do
+    Book.delete_all
+    Book.create title: "Ruby"
+  end
+
   let(:new_note) { stub_model(Note).as_new_record }
 
   before do

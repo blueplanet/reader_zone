@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "notes/edit.html.haml" do
+  before(:each) do
+    Book.delete_all
+  end
+  
   let(:user) { User.create name: 'testuser'}
   let(:book) { Book.create title: "Ruby" }
   let(:note) { Note.create book: book, page: 100, note: 'saved note', user: user }

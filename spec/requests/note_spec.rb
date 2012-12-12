@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe "Notes routing" do
-  let(:book) {Book.create title: "Ruby" }
+  let(:book) do
+    Book.delete_all
+    Book.create title: "Ruby"
+  end
 
   describe "GET /books/:book_id/notes/new" do
     it "status should success" do
