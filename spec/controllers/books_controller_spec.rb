@@ -159,4 +159,39 @@ describe BooksController do
       response.should render_template(:edit)
     end
   end
+
+  describe "PUT 'update'" do
+    context "with valid params" do
+      it "updates the requested book" do
+        Book.any_instance.should_receive(:update_attributes).with("title" => "Ruby Programing")
+        put :update, {id: book.id, book: {title: 'Ruby Programing'}}
+      end
+
+      it "assign the updated book to @book" do
+        put :update, {id: book.id, book: {title: 'Ruby Programing'}}
+        
+        assigns[:book].should eql(book)
+      end
+
+      it "redirect to book" do
+        put :update, {id: book.id, book: {title: 'Ruby Programing'}}
+
+        response.should redirect_to(book)
+      end
+    end
+
+    context "with invalid params" do
+      it "assign the requested book" do
+        put :update, {id: book.id, book: {title: ""}}
+
+        assigns[:book].should eq(book)
+      end
+
+      it "re-renders 'edit' templates" do
+        put :update, {id: book.id, book: {title: ""}}
+
+        response.should render_template(:edit)
+      end
+    end
+  end
 end
