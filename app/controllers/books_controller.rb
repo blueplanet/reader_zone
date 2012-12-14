@@ -19,14 +19,21 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    if current_user.nil? || current_user.id != @book.created_by.id
+      redirect_to @book
+    end
   end
 
   def update
     @book = Book.find(params[:id])
-    if @book.update_attributes(params[:book])
+    if current_user != @book.created_by
       redirect_to @book
     else
-      render :edit
+      if @book.update_attributes(params[:book])
+        redirect_to @book
+      else
+        render :edit
+      end
     end
   end
   

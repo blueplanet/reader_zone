@@ -11,7 +11,7 @@ describe BooksController do
   let(:book) { 
     Book.delete_all
 
-    book = Book.create( image_url: "test.png", title: "Ruby", description: "I's a language")
+    book = Book.create( image_url: "test.png", title: "Ruby", description: "I's a language", created_by: user)
 
     @n1 = book.notes.build page: 1, note: 'note1', user: user
     book.notes.build page: 1, note: 'note11', user: user_other
@@ -111,7 +111,7 @@ describe BooksController do
     context "with valid params" do
       it "creates a new book" do
         expect {
-          post :create, {book: {title: 'ruby 1', image_url: '.../test.png', description: 'ruby is ...'}}
+          post :create, {book: {"title" => 'ruby 1', "image_url" => '.../test.png', 'description' => 'ruby is ...', "created_by_id" => user.id.to_param }}
         }.to change(Book, :count).by(1)
       end
 
@@ -147,16 +147,34 @@ describe BooksController do
   end
 
   describe "GET 'edit'" do
-    it "should assigns @book" do
-      get :edit, id: book.id
+    context "with valid params" do
+      it "should assigns @book" do
+        get :edit, {id: book.id}, {user_id: user.id}
 
-      assigns[:book].should eq(book)
+        assigns[:book].should eq(book)
+      end
+
+      it "rendered 'edit' template" do
+        get :edit, {id: book.id}, {user_id: user.id}
+
+        response.should render_template(:edit)
+      end
     end
 
-    it "rendered 'edit' template" do
-      get :edit, id: book.id
+    context "without user_id" do
+      it "redirect to 'show'" do
+        get :edit, id: book.id
 
-      response.should render_template(:edit)
+        response.should redirect_to(book)
+      end
+    end
+
+    context "with other user" do
+      it "redirect to 'show'" do
+        get :edit, {id: book.id}, {user_id: user_other.id}
+
+        response.should redirect_to(book)
+      end
     end
   end
 
@@ -164,7 +182,7 @@ describe BooksController do
     context "with valid params" do
       it "updates the requested book" do
         Book.any_instance.should_receive(:update_attributes).with("title" => "Ruby Programing")
-        put :update, {id: book.id, book: {title: 'Ruby Programing'}}
+        put :update, {id: book.id, book: {title: 'Ruby Programing'}}, {user_id: book.created_by_id}
       end
 
       it "assign the updated book to @book" do
@@ -182,15 +200,25 @@ describe BooksController do
 
     context "with invalid params" do
       it "assign the requested book" do
-        put :update, {id: book.id, book: {title: ""}}
+        put :update, {id: book.id, book: {title: ""}}, {user_id: user.id}
 
         assigns[:book].should eq(book)
       end
 
       it "re-renders 'edit' templates" do
-        put :update, {id: book.id, book: {title: ""}}
+        put :update, {id: book.id, book: {title: ""}}, {user_id: user.id}
 
         response.should render_template(:edit)
+      end
+    end
+
+    context "without user_id" do
+      it "redirect to 'show'" do
+        put :update, {id: book.id, book: {"title" => "new title"}}, {user_id: user_other.id }
+
+        book.reload
+        book.title.should_not eq "new title"
+        response.should redirect_to(book)
       end
     end
   end

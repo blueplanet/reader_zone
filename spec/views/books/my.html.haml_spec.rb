@@ -13,7 +13,8 @@ describe "books/show" do
     book = Book.create(
       image_url: "http://www.rubyinside.com/wp-content/uploads/2008/02/hummingbird-book-the-ruby-programming-language.jpg",
       title: "The Ruby Programming",
-      description: "はじめに"
+      description: "はじめに",
+      created_by: user1
     )
 
     book.notes.build page: 10, note: "note test", user: user1
