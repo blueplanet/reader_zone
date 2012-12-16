@@ -16,8 +16,7 @@ describe "books/index.html.haml" do
       )
     ])
     render
-    expect(rendered).to match /Books/
-
+    
     expect(rendered).to match /img/
     expect(rendered).to match /The RSpec Book/
     expect(rendered).to match /ドキュメントを書くように/

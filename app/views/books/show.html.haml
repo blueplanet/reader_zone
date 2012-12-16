@@ -1,16 +1,26 @@
 = render 'book_detail'
 
-.notes.box
+.notes
   = link_to "自分のみ", my_notes_book_path(@book)
   = render 'book_notes_info', count: @book.notes.count
+  - last_page = 0
+  - last_user_id = 0
   - @book.notes.each do |note|
     .row
       .span1
-        .badge.badge-info= note.page
-      .span1= note.user.name
-      .span1
-        - if @current_user && note.user == @current_user
-          .btn-group
-            = link_to "編集", edit_book_note_path(@book, note), class: 'btn btn-small'
-            = link_to "削除", book_note_path(@book, note), method: :delete, data: { confirm: '本当に削除しますか？'}, class: 'btn btn-danger btn-small'
-      .span4= note.note
+        - if note.page != last_page
+          - last_page = note.page
+          - last_user_id = 0
+          .badge.badge-success= note.page
+      .span8
+        .row
+          .span1
+            - if note.user.id != last_user_id
+              - last_user_id = note.user.id
+              = note.user.name
+          .span1
+            - if @current_user && note.user == @current_user
+              .btn-group
+                = link_to "編集", edit_book_note_path(@book, note), class: 'btn btn-small'
+                = link_to "削除", book_note_path(@book, note), method: :delete, data: { confirm: '本当に削除しますか？'}, class: 'btn btn-danger btn-small'
+          .span4= note.note
