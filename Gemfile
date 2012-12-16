@@ -20,6 +20,7 @@ group :development do
 
   gem 'pry-rails'
   gem 'rails-sh'
+  gem 'better_errors'
 end
 
 group :assets do
