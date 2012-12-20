@@ -1,4 +1,11 @@
-= form_for Note.new, url: book_notes_path(@book.id) do |f|
-  = f.text_field :page
-  = f.text_area :note
-  = f.submit "保存"
+= form_for Note.new, url: book_notes_path(@book.id), html:{ class: 'form-horizontal'} do |f|
+  .control-group
+    = f.label "ページ", class: 'control-label'
+    .controls
+      = f.text_field :page
+  .control-group
+    = f.label "メモ", class: "control-label"
+    .controls
+      = f.text_area :note, rows: 10
+  .form-actions
+    = f.submit "保存", class: 'btn btn-primary'

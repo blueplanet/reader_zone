@@ -1,8 +1,6 @@
 = render 'book_detail'
 
 .notes
-  = link_to "自分のみ", my_notes_book_path(@book)
-  = render 'book_notes_info', count: @book.notes.count
   - last_page = 0
   - last_user_id = 0
   - @book.notes.each do |note|

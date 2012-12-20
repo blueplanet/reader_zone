@@ -1,11 +1,13 @@
 .row.book
   %a.span1(href="")
     %img{src: @book.image_url, width: 160, height: 160}
-  .span7
-    %span.row 
+  .span1
+  .span10
+    .row 
       %a= @book.title
-      = "created by #{@book.created_by.name}"
-    %span.row
+    .row
       %p= @book.description
-    %span.row
-      = link_to "ノートを追加", new_book_note_path(@book)
+    .row
+      = link_to "ノートを追加", new_book_note_path(@book), class: 'btn btn-success btn-small'
+      = link_to "自分のノート", my_notes_book_path(@book)
+      = "created by #{@book.created_by.name}"
