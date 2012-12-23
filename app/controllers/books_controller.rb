@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_filter :set_book, only: [:edit, :update, :show, :my]
+
   def index
     @books = Book.all
   end
@@ -18,14 +20,12 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:id])
     if current_user.nil? || current_user.id != @book.created_by.id
       redirect_to @book
     end
   end
 
   def update
-    @book = Book.find(params[:id])
     if current_user != @book.created_by
       redirect_to @book
     else
@@ -38,12 +38,15 @@ class BooksController < ApplicationController
   end
   
   def show
-    @book = Book.find(params[:id])
     @notes = @book.notes
   end
 
   def my
-    @book = Book.find(params[:id])
     @notes = @book.notes.of_user(current_user)
+  end
+
+  private
+  def set_book
+    @book = Book.find(params[:id])
   end
 end
