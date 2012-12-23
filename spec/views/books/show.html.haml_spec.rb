@@ -7,6 +7,8 @@ describe "books/show" do
 
   before do
     Book.delete_all
+
+    view.stub(:current_user) { user1}
   end
 
   let(:book) do

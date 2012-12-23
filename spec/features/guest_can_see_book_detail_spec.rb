@@ -30,12 +30,4 @@ feature 'ゲストとして、本の詳細情報を閲覧出来る' do
       page.should have_content note.note
     end
   end
-
-  scenario '本の詳細ページから、ノート追加画面へ遷移出来る' do
-    visit book_path(@book)
-
-    click_link "ノートを追加"
-
-    all("#new_note").count.should == 1
-  end
 end
