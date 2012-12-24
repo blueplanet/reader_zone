@@ -1,7 +1,22 @@
 = render 'book_detail'
 
 .notes
+  - last_page = 0
+  - last_user_id = 0
   - @notes.each do |note|
     .row
-      .span1= note.page
+      .span1
+        - if note.page != last_page
+          - last_page = note.page
+          - last_user_id = 0
+          .badge.badge-success= note.page
+      .span1
+        - if note.user.id != last_user_id
+          - last_user_id = note.user.id
+          = note.user.name
+      .span1
+        - if current_user && note.user == current_user
+          .btn-group
+            = link_to "編集", [@book, note], class: 'btn btn-small'
+            = link_to "削除", [@book, note], method: :delete, data: { confirm: '本当に削除しますか？'}, class: 'btn btn-danger btn-small'
       .span4= note.note

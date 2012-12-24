@@ -1,7 +1,7 @@
 # coding: utf-8
-require "spec_helper"
+require 'spec_helper'
 
-feature 'ユーザとして、ある本に対して自分の付けたノート一覧が見える' do
+feature 'ユーザとして、自分のノートを編集したい' do
   context "ログインしている場合" do
     def mock_hash
       {
@@ -13,7 +13,7 @@ feature 'ユーザとして、ある本に対して自分の付けたノート�
         }
       }
     end
-    
+
     background do
       OmniAuth.config.test_mode = true
       OmniAuth.config.mock_auth[:twitter] = mock_hash
@@ -37,23 +37,17 @@ feature 'ユーザとして、ある本に対して自分の付けたノート�
 
       visit root_path
       click_link "Twitterでログイン"
+
+      click_link @book.title
     end
 
-    scenario '自分の作成したノートのみ表示される' do
-      click_link @book.title
-
-      page.should have_content @user1.name
-      page.should have_content @user2.name
-      page.should have_content @user3.name
-
-      click_link "自分のノート"
-
-      page.should have_content @user1.name
-      page.should_not have_content @user2.name
-      page.should_not have_content @user3.name
-
+    scenario '自分のノートに対して編集ページへ遷移出来る' do
       page.should have_content "編集"
-      page.should have_content "削除"
+
+      first(:link, "編集").click
+
+      page.should have_field "note_page", with: @book.notes[1].page.to_s
+      page.should have_field "note_note", with: @book.notes[1].note
     end
   end
 end

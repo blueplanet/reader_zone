@@ -9,6 +9,6 @@
       %p= @book.description
     .row
       - if current_user
-        = link_to "ノートを追加", new_book_note_path(@book), class: 'btn btn-success btn-small'
-      = link_to "自分のノート", my_notes_book_path(@book)
+        = link_to "ノートを追加", new_book_note_path(@book.id), class: 'btn btn-success btn-small'
+      = link_to "自分のノート", my_notes_book_path(@book.id)
       = "created by #{@book.created_by.name}"
