@@ -17,6 +17,6 @@
       .span1
         - if current_user && note.user == current_user
           .btn-group
-            = link_to "編集", [@book, note], class: 'btn btn-small'
+            = link_to "編集", edit_book_note_path(@book, note), class: 'btn btn-small'
             = link_to "削除", [@book, note], method: :delete, data: { confirm: '本当に削除しますか？'}, class: 'btn btn-danger btn-small'
       .span4= note.note

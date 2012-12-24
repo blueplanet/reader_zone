@@ -42,8 +42,6 @@ feature 'ユーザとして、自分のノートを編集したい' do
     end
 
     scenario '自分のノートに対して編集ページへ遷移出来る' do
-      page.should have_content "編集"
-
       first(:link, "編集").click
 
       page.should have_field "note_page", with: @book.notes[1].page.to_s

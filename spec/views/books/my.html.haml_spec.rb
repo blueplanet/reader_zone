@@ -20,6 +20,7 @@ describe "books/my" do
 
     book.notes.build page: 10, note: "note test", user: user1
     book.notes.build page: 100, note: "note test 22", user: user2
+    book.save
 
     book
   end
