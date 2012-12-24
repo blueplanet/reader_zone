@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe "books/show" do
+describe "books/my" do
   let(:user1) {User.create name: "testuser1"}
   let(:user2) {User.create name: "testuser2"}
 
@@ -37,7 +37,7 @@ describe "books/show" do
 
   it "should display note list" do
     assign(:book, book)
-    assign(:notes, book.notes.first)
+    assign(:notes, book.notes)
 
     render
 
